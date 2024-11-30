@@ -1,6 +1,6 @@
 import { Text, Menu, Flex, Avatar, Image } from '@mantine/core';
 import { HiOutlineDesktopComputer } from 'react-icons/hi';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 import CoalImage from '../assets/coalition.webp';
 import { useEffect, useState } from 'react';
