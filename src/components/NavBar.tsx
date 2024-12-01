@@ -71,7 +71,7 @@ const Navbar = () => {
                     {
                         !(user?.id && user?.steamid) &&
                         <>
-                            <Menu.Item color="green" onClick={() => {/* navigate('/dashboard') */}} leftSection={<IoIosLogIn />}>
+                            <Menu.Item color="green" onClick={() => {window.location.href = '/api/auth/login'}} leftSection={<IoIosLogIn />}>
                                 Se Connecter
                             </Menu.Item>
                         </>
