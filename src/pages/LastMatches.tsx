@@ -30,7 +30,7 @@ const LastMatches = () => {
     const [matchStats, setMatchStats] = useState<MatchStat[]>([]);
     const [loading, setLoading] = useState<boolean>(true);
     const [errMessage, setErrorMessage] = useState<null | string>(null);
-    const [sortConfig, setSortConfig] = useState<{ key: keyof MatchStat; direction: 'asc' | 'desc' } | null>(null);
+    const [sortConfig, setSortConfig] = useState<{ key: keyof MatchStat; direction: 'asc' | 'desc' } | null>({key: 'id', direction: 'desc'});
 
     useEffect(() => {
         const fetchMatchStats = async () => {
