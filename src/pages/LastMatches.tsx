@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Table, Container, Text, Loader, Center, ScrollArea, Title, Box, Flex, Alert } from '@mantine/core';
+import { Table, Container, Text, Center, ScrollArea, Title, Box, Flex, Alert, LoadingOverlay } from '@mantine/core';
 import { IconArrowUp, IconArrowDown, IconArrowsSort, IconAlertSquareRounded } from '@tabler/icons-react';
 
 interface MatchStat {
@@ -76,14 +76,8 @@ const LastMatches = () => {
     };
 
     return (
-        <Container size="xl" mt="lg">
-            {loading ? (
-                <Center mt="xl" style={{alignItems: 'center', gap: '2em'}}>
-                    <Loader color="orange" size="lg" />
-                    <Text fs="italic">Chargement en cours des données...</Text>
-                    <Loader color="orange" size="lg" />
-                </Center>
-            ) : errMessage ? (
+        <Container size="xl" mt="lg" pb="2em">
+            {errMessage ? (
                 <Center mt="xl">
                     <Box>
                         <Alert variant="light" color="red" radius="md" title="Alert title" icon={<IconAlertSquareRounded />}>
@@ -96,7 +90,8 @@ const LastMatches = () => {
                     <Title mb="md" style={{ textAlign: 'center' }}>
                         Dernier {matchStats.length} Matchs
                     </Title>
-                    <ScrollArea h="80vh" scrollbarSize={4} scrollHideDelay={500} mb="2em">
+                    <ScrollArea h="80vh" scrollbarSize={4} scrollHideDelay={500}>
+                        <LoadingOverlay visible={loading} zIndex={100} overlayProps={{ radius: "sm", blur: 2 }} />
                         <Table highlightOnHover stickyHeader verticalSpacing="md">
                             <Table.Thead>
                                 <Table.Tr>
