@@ -57,7 +57,7 @@ const Navbar = () => {
                         user?.id &&
                         <>
                             <Menu.Label>Navigation</Menu.Label>
-                            <Menu.Item onClick={() => navigate('/dashboard')} leftSection={<HiOutlineDesktopComputer />}>
+                            <Menu.Item onClick={() => navigate('/')} leftSection={<HiOutlineDesktopComputer />}>
                                 Dashboard
                             </Menu.Item>
 
