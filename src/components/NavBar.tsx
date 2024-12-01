@@ -27,7 +27,7 @@ const Navbar = () => {
         } catch (err) {
 
         }
-    }, []);
+    }, [localStorage.getItem('userData')]);
 
     const logout = () => {
         localStorage.removeItem('userData');
