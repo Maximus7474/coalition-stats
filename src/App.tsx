@@ -6,6 +6,7 @@ import LastMatches from './pages/LastMatches';
 import Footer from './components/Footer';
 import AuthSuccess from './pages/Auth';
 import { Container, Flex } from '@mantine/core'; // Import Mantine Flex
+import NotFoundPage from './pages/404';
 
 const App: React.FC = () => {
   return (
@@ -18,6 +19,7 @@ const App: React.FC = () => {
           <Routes>
             <Route path="/" element={<LastMatches />} />
             <Route path="/auth-success" element={<AuthSuccess />} />
+            <Route path="*" element={<NotFoundPage />} />
           </Routes>
         </Container>
 
