@@ -42,19 +42,19 @@ const Navbar = () => {
             <Menu shadow="md" width={200}>
                 <Menu.Target>
                     <Flex align="center" gap="xs" style={{ cursor: 'pointer' }}>
+                        <Flex direction='column'>
+                            <Text>{user?.global_name || "Déconnecté"}</Text>
+                        </Flex>
                         <Avatar
                             src={user?.avatar && user?.id ? `https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}.webp` : "https://cdn-icons-png.flaticon.com/512/4945/4945973.png"}
                             radius="xl"
                         />
-                        <Flex direction='column'>
-                            <Text>{user?.global_name || "Déconnecté"}</Text>
-                        </Flex>
                     </Flex>
                 </Menu.Target>
 
                 <Menu.Dropdown>
                     {
-                        user?.id && user?.steamid &&
+                        user?.id &&
                         <>
                             <Menu.Label>Navigation</Menu.Label>
                             <Menu.Item onClick={() => navigate('/dashboard')} leftSection={<HiOutlineDesktopComputer />}>
@@ -69,7 +69,7 @@ const Navbar = () => {
                         </>
                     }
                     {
-                        !(user?.id && user?.steamid) &&
+                        !(user?.id) &&
                         <>
                             <Menu.Item color="green" onClick={() => {window.location.href = '/api/auth/login'}} leftSection={<IoIosLogIn />}>
                                 Se Connecter
