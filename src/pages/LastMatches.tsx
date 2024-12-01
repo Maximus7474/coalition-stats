@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Table, Container, Text, Loader, Center, ScrollArea, Title, Box, Flex, Alert } from '@mantine/core';
 import { IconArrowUp, IconArrowDown, IconArrowsSort, IconAlertSquareRounded } from '@tabler/icons-react';
-import axios from 'axios';
 
 interface MatchStat {
     id: number;
@@ -36,12 +35,15 @@ const LastMatches = () => {
     useEffect(() => {
         const fetchMatchStats = async () => {
             try {
-                const response = await axios.get('/api/getMatches');
-                setMatchStats(response.data.data);
-                setTimeout(() => {
-                    console.log('Attempting to do shit:');
-                    sortedStats();
-                }, 1000);
+                const response: any = await fetch('/api/getMatches');
+                
+                if (!response.ok) {
+                    throw new Error(`API request failed with status ${response.status}`);
+                }
+        
+                const data = await response.json();
+
+                if (data.success) setMatchStats(data.data);
             } catch (error: any) {
                 setErrorMessage(`${error.response.status} - ${JSON.stringify(error.response.data)}` || 'Raison inconnue');
                 console.error('Error fetching match stats:', error);
