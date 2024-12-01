@@ -2,22 +2,22 @@ import React from 'react';
 import ThemeButton from './components/ToggleTheme';
 import Navbar from './components/NavBar';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import { Title } from '@mantine/core';
+import LastMatches from './pages/LastMatches';
 
 const App: React.FC = () => {
 
   
 
 
-  return (
+  return (<>
     <Router>
       <Navbar />
       <ThemeButton />
       <Routes>
-        <Route path="/" element={<Title>Temp</Title>} />
+        <Route path="/" element={<LastMatches />} />
       </Routes>
     </Router>
-  );
+  </>);
 }
 
 export default App;
