@@ -3,6 +3,7 @@ import ThemeButton from './components/ToggleTheme';
 import Navbar from './components/NavBar';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import LastMatches from './pages/LastMatches';
+import Footer from './components/Footer';
 
 const App: React.FC = () => {
 
@@ -16,6 +17,7 @@ const App: React.FC = () => {
       <Routes>
         <Route path="/" element={<LastMatches />} />
       </Routes>
+      <Footer />
     </Router>
   </>);
 }
