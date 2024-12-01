@@ -1,3 +1,4 @@
+import { LoadingOverlay } from '@mantine/core';
 import { useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 
@@ -22,7 +23,7 @@ const AuthSuccess = () => {
         }
     }, [location.search, navigate]);
 
-    return <p>Authenticating...</p>;
+    return <LoadingOverlay visible={true}/>;
 };
 
 export default AuthSuccess;

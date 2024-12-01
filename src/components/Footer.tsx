@@ -3,7 +3,7 @@ import { IconCopyright } from "@tabler/icons-react";
 
 const Footer = () => {
     return (<>
-        <Container fluid bg="var(--mantine-color-gray-light)" style={{padding: '1em 0'}}>
+        <Container fluid w="100vw" bg="var(--mantine-color-gray-light)" style={{padding: '1em 0'}}>
             <Flex gap="0.5em" style={{margin: '0 auto', width: 'fit-content'}}>
                 <IconCopyright/>
                 <Text fs="italic" style={{textAlign: 'center'}}>
