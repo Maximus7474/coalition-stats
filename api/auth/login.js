@@ -11,6 +11,9 @@ export default function handler(req, res) {
     else if (HOST_URL.includes('vercel') && !HOST_URL.startsWith('http')) redirectUri = `https://${HOST_URL}/api/auth/callback`;
 
     console.log('Using', redirectUri, 'as redirect uri');
+    console.log('Raw Shit:', HOST_URL, redirectUri);
+    console.log('1.', HOST_URL.includes('localhost') && !HOST_URL.startsWith('http'));
+    console.log('2.', HOST_URL.includes('vercel') && !HOST_URL.startsWith('http'));
 
     const params = new URLSearchParams({
         client_id: DISCORD_CLIENT_ID,
