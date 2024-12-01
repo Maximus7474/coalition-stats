@@ -37,7 +37,7 @@ const Navbar = () => {
     return (
         <Flex direction="row" justify="space-between" align="center" style={{ padding: '1em 2em' }}>
             <Image src={CoalImage} style={{ height: '4em', borderRadius: '50%' }} />
-            <Text size="xl" fw={700}>Coaltion Statistiques</Text>
+            <Text size="xl" fw={700}>Coalition Statistiques</Text>
 
             <Menu shadow="md" width={200}>
                 <Menu.Target>
