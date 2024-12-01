@@ -5,7 +5,7 @@ export default function handler(req, res) {
         return res.status(500).json({ error: "Missing environment variables" });
     }
 
-    let redirectUri;
+    let redirectUri = HOST_URL;
 
     if (HOST_URL.includes('localhost') && !HOST_URL.startsWith('http')) redirectUri = `http://${HOST_URL}`;
     else if (HOST_URL.includes('vercel') && !HOST_URL.startsWith('http')) redirectUri = `https://${HOST_URL}`;
