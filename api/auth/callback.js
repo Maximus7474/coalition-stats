@@ -7,10 +7,12 @@ export default async function handler(req, res) {
         return res.status(400).json({ error: 'Missing authorization code' });
       }
       
-      let redirect_uri;
       const { HOST_URL } = process.env;
-      if (HOST_URL.includes('localhost') && !HOST_URL.startsWith('http')) redirect_uri = `http://${HOST_URL}/api/auth/callback`;
-      else if (!HOST_URL.startsWith('http')) redirect_uri = `https://${HOST_URL}/api/auth/callback`;
+      let redirect_uri = HOST_URL;
+      if (HOST_URL.includes('localhost') && !HOST_URL.startsWith('http')) redirect_uri = `http://${HOST_URL}`;
+      else if (!HOST_URL.startsWith('http')) redirect_uri = `https://${HOST_URL}`;
+
+      redirect_uri = redirect_uri + '/api/auth/callback'
   
       const tokenResponse = await fetch('https://discord.com/api/oauth2/token', {
         method: 'POST',
