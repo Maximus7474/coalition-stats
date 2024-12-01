@@ -10,8 +10,6 @@ const AuthSuccess = () => {
         const params = new URLSearchParams(location.search);
         const data = params.get('data');
 
-        console.log('obtained data:', data ? JSON.parse(decodeURIComponent(data)) : data, data ? 'valid data' : 'invalid data')
-
         if (data) {
             const userData = JSON.parse(decodeURIComponent(data));
             localStorage.setItem('userData', JSON.stringify({
