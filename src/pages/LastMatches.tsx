@@ -55,7 +55,6 @@ const LastMatches = () => {
         fetchMatchStats();
     }, []);
 
-    // Sorting function
     const sortedStats = () => {
         if (!sortConfig) return matchStats;
         return [...matchStats].sort((a, b) => {
@@ -68,7 +67,6 @@ const LastMatches = () => {
         });
     };
 
-    // Handle column header click
     const handleSort = (key: keyof MatchStat) => {
         setSortConfig((prevConfig) => {
             if (prevConfig && prevConfig.key === key) {
@@ -81,9 +79,10 @@ const LastMatches = () => {
     return (
         <Container size="xl" mt="lg">
             {loading ? (
-                <Center mt="xl">
-                    <Loader color="teal" size="lg" />
-                    <Text mt="md" fs="italic">Chargement en cours des données...</Text>
+                <Center mt="xl" style={{alignItems: 'center', gap: '2em'}}>
+                    <Loader color="orange" size="lg" />
+                    <Text fs="italic">Chargement en cours des données...</Text>
+                    <Loader color="orange" size="lg" />
                 </Center>
             ) : errMessage ? (
                 <Center mt="xl">
