@@ -8,7 +8,7 @@ export default function handler(req, res) {
     let redirectUri;
 
     if (HOST_URL.includes('localhost') && !HOST_URL.startsWith('http')) redirectUri = `http://${HOST_URL}/api/auth/callback`;
-    else if (!HOST_URL.startsWith('http')) redirectUri = `https://${HOST_URL}/api/auth/callback`;
+    else if (HOST_URL.includes('vercel') && !HOST_URL.startsWith('http')) redirectUri = `https://${HOST_URL}/api/auth/callback`;
 
     console.log('Using', redirectUri, 'as redirect uri');
 
