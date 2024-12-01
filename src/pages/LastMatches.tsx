@@ -15,10 +15,9 @@ interface MatchStat {
 }
 
 const translations: { [key: string]: string } = {
-    id: 'id',
+    endTime: 'date',
     level: 'map',
     mode: 'mode',
-    endTime: 'date',
     ticketDifference: 'différence de ticket',
     winnerFaction: 'faction gagnante',
     winnerFactionType: 'type de faction',
@@ -122,14 +121,13 @@ const LastMatches = () => {
                             <Table.Tbody>
                                 {sortedStats().map((match) => (
                                     <Table.Tr key={match.id}>
-                                        <Table.Td>{match.id}</Table.Td>
-                                        <Table.Td>{match.level}</Table.Td>
-                                        <Table.Td>{match.mode}</Table.Td>
                                         <Table.Td>{new Date(match.endTime).toLocaleString()}</Table.Td>
-                                        <Table.Td>{match.ticketDifference}</Table.Td>
-                                        <Table.Td>{match.winnerFaction}</Table.Td>
+                                        <Table.Td>{match.level}</Table.Td>
+                                        <Table.Td style={{textAlign: 'center'}}>{match.mode}</Table.Td>
+                                        <Table.Td style={{textAlign: 'center'}}>{match.ticketDifference}</Table.Td>
+                                        <Table.Td style={{textAlign: 'center'}}>{match.winnerFaction}</Table.Td>
                                         <Table.Td>{match.winnerFactionType}</Table.Td>
-                                        <Table.Td>{match.loserFaction}</Table.Td>
+                                        <Table.Td style={{textAlign: 'center'}}>{match.loserFaction}</Table.Td>
                                         <Table.Td>{match.loserFactionType}</Table.Td>
                                     </Table.Tr>
                                 ))}
