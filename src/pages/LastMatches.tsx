@@ -96,8 +96,8 @@ const LastMatches = () => {
                     <Title mb="md" style={{ textAlign: 'center' }}>
                         Dernier {matchStats.length} Matchs
                     </Title>
-                    <ScrollArea>
-                        <Table highlightOnHover>
+                    <ScrollArea h="80vh" scrollbarSize={4} scrollHideDelay={500} mb="2em">
+                        <Table highlightOnHover stickyHeader verticalSpacing="md">
                             <Table.Thead>
                                 <Table.Tr>
                                     {Object.keys(translations).map((key) => (
