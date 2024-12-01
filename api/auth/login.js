@@ -1,14 +1,16 @@
 export default function handler(req, res) {
-    const { DISCORD_CLIENT_ID, VERCEL_URL } = process.env;
+    const { DISCORD_CLIENT_ID, HOST_URL } = process.env;
 
-    if (!DISCORD_CLIENT_ID || !VERCEL_URL) {
+    if (!DISCORD_CLIENT_ID || !HOST_URL) {
         return res.status(500).json({ error: "Missing environment variables" });
     }
 
     let redirectUri;
 
-    if (VERCEL_URL.includes('localhost') && !VERCEL_URL.startsWith('http')) redirectUri = `http://${VERCEL_URL}/api/auth/callback`;
-    else if (!VERCEL_URL.startsWith('http')) redirectUri = `https://${VERCEL_URL}/api/auth/callback`;
+    if (HOST_URL.includes('localhost') && !HOST_URL.startsWith('http')) redirectUri = `http://${HOST_URL}/api/auth/callback`;
+    else if (!HOST_URL.startsWith('http')) redirectUri = `https://${HOST_URL}/api/auth/callback`;
+
+    console.log('Using', redirectUri, 'as redirect uri');
 
     const params = new URLSearchParams({
         client_id: DISCORD_CLIENT_ID,

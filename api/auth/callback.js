@@ -8,9 +8,9 @@ export default async function handler(req, res) {
       }
       
       let redirect_uri;
-      const { VERCEL_URL } = process.env;
-      if (VERCEL_URL.includes('localhost') && !VERCEL_URL.startsWith('http')) redirect_uri = `http://${VERCEL_URL}/api/auth/callback`;
-      else if (!VERCEL_URL.startsWith('http')) redirect_uri = `https://${VERCEL_URL}/api/auth/callback`;
+      const { HOST_URL } = process.env;
+      if (HOST_URL.includes('localhost') && !HOST_URL.startsWith('http')) redirect_uri = `http://${HOST_URL}/api/auth/callback`;
+      else if (!HOST_URL.startsWith('http')) redirect_uri = `https://${HOST_URL}/api/auth/callback`;
   
       const tokenResponse = await fetch('https://discord.com/api/oauth2/token', {
         method: 'POST',
