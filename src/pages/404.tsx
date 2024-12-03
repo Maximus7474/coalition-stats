@@ -6,7 +6,7 @@ const NotFoundPage = () => {
 
     return (
         <Center style={{ flexDirection: 'column', padding: '2em', margin: 'auto 0' }}>
-            <Title order={1} style={{ fontSize: '3rem', color: '#333' }}>
+            <Title order={1} style={{ fontSize: '3rem' }}>
                 404 - Page Not Found
             </Title>
             <Text size="lg" style={{ marginBottom: '1.5em' }}>
