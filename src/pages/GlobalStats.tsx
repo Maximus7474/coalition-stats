@@ -7,14 +7,16 @@ interface FactionStats {
     Faction: string;
     Victoires: number;
     Defaites: number;
+    Picks: number;
 }
 
-interface WinrateToolTipProps {
+interface BarGraphToolTipProps {
     label: string;
+    type: "winrate"|"pickrate";
     payload: Record<string, any>[] | undefined;
 }
 
-const WinrateToolTip: React.FC<WinrateToolTipProps> = ({ label, payload }) => {
+const BarChartToolTip: React.FC<BarGraphToolTipProps> = ({ label, payload, type }) => {
     if(!payload) return null;
     const sum: number = payload.map((item: any) => (item.value)).reduce((acc, num) => acc + num, 0);
     return(
@@ -23,14 +25,16 @@ const WinrateToolTip: React.FC<WinrateToolTipProps> = ({ label, payload }) => {
                 {label}
             </Text>
             { payload.map((item: any) => (
-                    <Text key={item.name} c={item.color} fz="sm">
-                        {item.name}: {item.value}
+                    <Text key={item.name} c={type === 'winrate' ? item.color : undefined} fz="sm">
+                        {type === 'pickrate' ? "Pick Rate:" : item.name}: {item.value}{type === 'pickrate' ? '%' : ''}
                     </Text>
                 ))
             }
-            <Text key='matchs' c='grey' fz="sm">
-                Matchs Totaux: {sum}
-            </Text>
+            {
+                type === 'winrate' && (<Text key='matchs' c='grey' fz="sm">
+                    Matchs Totaux: {sum}
+                </Text>)
+            }
         </Paper >
     );
 }
@@ -38,19 +42,22 @@ const WinrateToolTip: React.FC<WinrateToolTipProps> = ({ label, payload }) => {
 const GlobalStats: React.FC<{ matches: MatchStat[] }> = ({ matches }) => {
 
     const [data, setData] = useState<FactionStats[]>([
-        { Faction: 'IMF', Victoires: 10, Defaites: 2 },
-        { Faction: 'FRA', Victoires: 2, Defaites: 10 }
+        { Faction: 'IMF', Victoires: 10, Defaites: 2, Picks: 12 },
+        { Faction: 'FRA', Victoires: 2, Defaites: 10, Picks: 12 }
     ]);
 
     useEffect(() => {
         let sortedStats: { [key: string]: any } = {};
 
         matches.forEach(match => {
-            if (!sortedStats[match.winnerFaction]) sortedStats[match.winnerFaction] = { faction: match.winnerFaction, Victoires: 0, Defaites: 0 };
-            if (!sortedStats[match.loserFaction]) sortedStats[match.loserFaction] = { faction: match.loserFaction, Victoires: 0, Defaites: 0 };
+            if (!sortedStats[match.winnerFaction]) sortedStats[match.winnerFaction] = { faction: match.winnerFaction, Victoires: 0, Defaites: 0, Picks: 0 };
+            if (!sortedStats[match.loserFaction]) sortedStats[match.loserFaction] = { faction: match.loserFaction, Victoires: 0, Defaites: 0, Picks: 0 };
 
             sortedStats[match.winnerFaction]['Victoires']++;
             sortedStats[match.loserFaction]['Defaites']++;
+
+            sortedStats[match.winnerFaction]['Picks']++;
+            sortedStats[match.loserFaction]['Picks']++;
         });
 
         setData(
@@ -71,7 +78,7 @@ const GlobalStats: React.FC<{ matches: MatchStat[] }> = ({ matches }) => {
                 dataKey="faction"
                 type="stacked"
                 tooltipProps={{
-                    content: ({ label, payload }) => <WinrateToolTip label={label} payload={payload} />,
+                    content: ({ label, payload }) => <BarChartToolTip label={label} payload={payload} type="winrate" />
                 }}
                 series={[
                     { name: 'Victoires', color: 'blue.6' },
@@ -83,6 +90,21 @@ const GlobalStats: React.FC<{ matches: MatchStat[] }> = ({ matches }) => {
             />
 
             <Divider />
+            
+            <BarChart
+                h={600}
+                w={1000}
+                data={data.map(item => ({...item, Picks: Math.round(item.Picks / matches.length * 10000) / 100}))}
+                dataKey="faction"
+                tooltipProps={{
+                    content: ({ label, payload }) => <BarChartToolTip label={label} payload={payload} type="pickrate" />
+                }}
+                getBarColor={(value) => (value <= 10 ? 'red.8' : 'teal.8')}
+                series={[{ name: 'Picks', color: 'blue' }]}
+                style={{
+                    margin: '1em auto'
+                }}
+            />
         </Container>
     );
 };
