@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import { Table, Container, Text, Center, ScrollArea, Title, Box, Flex, Alert, LoadingOverlay } from '@mantine/core';
-import { IconArrowUp, IconArrowDown, IconArrowsSort, IconAlertSquareRounded } from '@tabler/icons-react';
+import { Table, Container, Text, ScrollArea, Title, Flex } from '@mantine/core';
+import { IconArrowUp, IconArrowDown, IconArrowsSort } from '@tabler/icons-react';
 import { MatchStat } from '../utils/types';
 
 const translations: { [key: string]: string } = {
