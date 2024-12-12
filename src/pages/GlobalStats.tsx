@@ -67,7 +67,7 @@ const GlobalStats: React.FC<{ matches: MatchStat[] }> = ({ matches }) => {
 
     return (
         <Container size="xl" mt="lg" pb="2em">
-            <Title>
+            <Title style={{textAlign: "center", margin: '0 auto'}}>
                 Win Rate des Factions
             </Title>
 
@@ -89,10 +89,14 @@ const GlobalStats: React.FC<{ matches: MatchStat[] }> = ({ matches }) => {
                 }}
             />
 
-            <Divider />
+            <Divider m="md" style={{margin: '2em auto'}} />
+
+            <Title style={{textAlign: "center", margin: '0 auto'}}>
+                Pick Rate des Factions
+            </Title>
             
             <BarChart
-                h={600}
+                h={300}
                 w={1000}
                 data={data.map(item => ({...item, Picks: Math.round(item.Picks / matches.length * 10000) / 100}))}
                 dataKey="faction"
