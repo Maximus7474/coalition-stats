@@ -1,11 +1,12 @@
 import { Text, Menu, Flex, Avatar, Image } from '@mantine/core';
-import { HiOutlineDesktopComputer } from 'react-icons/hi';
 import { useNavigate } from 'react-router-dom';
 
-import CoalImage from '../assets/coalition.webp';
 import { useEffect, useState } from 'react';
 import { FiLogOut } from 'react-icons/fi';
-import { IoIosLogIn } from 'react-icons/io';
+import { IoIosLogIn, IoIosStats } from 'react-icons/io';
+import { HiOutlineDesktopComputer } from 'react-icons/hi';
+
+import CoalImage from '../assets/coalition.webp';
 
 export interface UserProps {
     avatar: string;
@@ -53,28 +54,29 @@ const Navbar = () => {
                 </Menu.Target>
 
                 <Menu.Dropdown>
+                    <Menu.Label>Navigation</Menu.Label>
+
+                    <Menu.Item onClick={() => navigate('/')} leftSection={<HiOutlineDesktopComputer />}>
+                        Derniers Matchs
+                    </Menu.Item>
+
+                    <Menu.Item onClick={() => navigate('/globalstats')} leftSection={<IoIosStats />}>
+                        Stats Global
+                    </Menu.Item>
+                    
+                    <Menu.Divider />
+
                     {
-                        user?.id &&
-                        <>
-                            <Menu.Label>Navigation</Menu.Label>
-                            <Menu.Item onClick={() => navigate('/')} leftSection={<HiOutlineDesktopComputer />}>
-                                Dashboard
-                            </Menu.Item>
-
-                            <Menu.Divider />
-
+                        user?.id ? (
                             <Menu.Item color="red" onClick={logout} leftSection={<FiLogOut style={{ fontWeight: 'bold' }} />}>
                                 Logout
                             </Menu.Item>
-                        </>
-                    }
-                    {
-                        !(user?.id) &&
-                        <>
+
+                        ) : (
                             <Menu.Item color="green" onClick={() => {window.location.href = '/api/auth/login'}} leftSection={<IoIosLogIn />}>
                                 Se Connecter
                             </Menu.Item>
-                        </>
+                        )
                     }
 
                 </Menu.Dropdown>

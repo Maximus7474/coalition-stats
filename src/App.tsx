@@ -9,6 +9,7 @@ import { Container, Flex, LoadingOverlay } from '@mantine/core'; // Import Manti
 import NotFoundPage from './pages/404';
 import { MatchStat } from './utils/types';
 import ErrorElement from './components/ErrorElement';
+import GlobalStats from './pages/GlobalStats';
 
 const App: React.FC = () => {
   const [matches, setRecentMatches] = useState<MatchStat[]>([]);
@@ -52,6 +53,7 @@ const App: React.FC = () => {
         <Container fluid style={{ flex: 1 }}>
           <Routes>
             <Route path="/" element={<LastMatches matches={matches} />} />
+            <Route path="/globalstats" element={<GlobalStats matches={matches} />} />
             <Route path="/auth-success" element={<AuthSuccess />} />
             <Route path="*" element={<NotFoundPage />} />
           </Routes>
