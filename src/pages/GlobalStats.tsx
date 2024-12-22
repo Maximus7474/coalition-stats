@@ -26,7 +26,7 @@ const BarChartToolTip: React.FC<BarGraphToolTipProps> = ({ label, payload, type 
             </Text>
             { payload.map((item: any) => (
                     <Text key={item.name} c={type === 'winrate' ? item.color : undefined} fz="sm">
-                        {type === 'pickrate' ? "Pick Rate:" : item.name}: {item.value}{type === 'pickrate' ? '%' : ''}
+                        {type === 'pickrate' ? "Pick Rate" : item.name}: {item.value}{type === 'pickrate' ? '%' : ''}
                     </Text>
                 ))
             }
