@@ -7,19 +7,22 @@ import Footer from './components/Footer';
 import AuthSuccess from './pages/Auth';
 import { Container, Flex, LoadingOverlay } from '@mantine/core'; // Import Mantine Flex
 import NotFoundPage from './pages/404';
-import { MatchStat } from './utils/types';
+import { MatchStat, Tickrates } from './utils/types';
 import ErrorElement from './components/ErrorElement';
 import GlobalStats from './pages/GlobalStats';
+import ServerHealth from './pages/ServerHealth';
+import PlayerStats from './pages/PlayerStats';
 
 const App: React.FC = () => {
   const [matches, setRecentMatches] = useState<MatchStat[]>([]);
+  const [tickrates, setRecentTickrates] = useState<Tickrates[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [errMessage, setErrorMessage] = useState<null | string>(null);
 
   useEffect(() => {
     const fetchMatchStats = async () => {
       try {
-        const response: any = await fetch('/api/getMatches');
+        const response = await fetch('/api/getMatches');
 
         if (!response.ok) {
           throw new Error(`API request failed with status ${response.status}`);
@@ -28,15 +31,37 @@ const App: React.FC = () => {
         const data = await response.json();
 
         if (data.success) setRecentMatches(data.data);
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       } catch (error: any) {
-        setErrorMessage(`${error.response.status} - ${JSON.stringify(error.response.data)}` || 'Raison inconnue');
         console.error('Error fetching match stats:', error);
+        setErrorMessage(error.response.status ? `${error.response.status} - ${JSON.stringify(error.response.data)}` : 'Raison inconnue');
+      } finally {
+        setLoading(false);
+      }
+    };
+    const fetchServerHealthStats = async () => {
+      try {
+        // const response = await fetch('/api/getServerHealth');
+        const response = await fetch('http://localhost:5000/api/statistics/server');
+
+        if (!response.ok) {
+          throw new Error(`API request failed with status ${response.status}`);
+        }
+
+        const data = await response.json();
+
+        if (data) setRecentTickrates(data);
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      } catch (error: any) {
+        console.error('Error fetching server health stats:', error);
+        setErrorMessage(error?.response.status ? `${error.response.status} - ${JSON.stringify(error.response.data)}` : 'Raison inconnue');
       } finally {
         setLoading(false);
       }
     };
 
     fetchMatchStats();
+    fetchServerHealthStats();
   }, []);
 
   return (
@@ -54,6 +79,7 @@ const App: React.FC = () => {
           <Routes>
             <Route path="/" element={<LastMatches matches={matches} />} />
             <Route path="/globalstats" element={<GlobalStats matches={matches} />} />
+            <Route path="/health" element={<ServerHealth tickrates={tickrates} />} />
             <Route path="/playerstats" element={<PlayerStats />} />
             <Route path="/auth-success" element={<AuthSuccess />} />
             <Route path="*" element={<NotFoundPage />} />
