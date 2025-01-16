@@ -6,14 +6,10 @@ import App from './App.tsx';
 import '@mantine/core/styles.css';
 import '@mantine/charts/styles.css';
 
-const RootComponent = () => {
-  return (
-    <StrictMode>
-        <MantineProvider defaultColorScheme="auto">
-          <App />
-        </MantineProvider>
-    </StrictMode>
-  );
-};
-
-createRoot(document.getElementById('root')!).render(<RootComponent />);
+createRoot(document.getElementById('root')!).render(
+  <StrictMode>
+      <MantineProvider defaultColorScheme="auto">
+        <App />
+      </MantineProvider>
+  </StrictMode>
+);
