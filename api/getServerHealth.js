@@ -5,7 +5,7 @@ export default async function handler(req, res) {
 
     try {
         const apiKey = process.env.API_KEY;
-        const url = `${process.env.QUERY_MATCHES_URL}/matches`;
+        const url = `${process.env.QUERY_MATCHES_URL}/server`;
 
         const response = await fetch(url, {
             method: 'GET',
