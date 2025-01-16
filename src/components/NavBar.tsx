@@ -5,6 +5,7 @@ import { useEffect, useState } from 'react';
 import { FiLogOut } from 'react-icons/fi';
 import { IoIosLogIn, IoIosStats } from 'react-icons/io';
 import { HiOutlineDesktopComputer } from 'react-icons/hi';
+import { MdSupervisorAccount } from 'react-icons/md';
 
 import CoalImage from '../assets/coalition.webp';
 
@@ -62,6 +63,10 @@ const Navbar = () => {
 
                     <Menu.Item onClick={() => navigate('/globalstats')} leftSection={<IoIosStats />}>
                         Stats Global
+                    </Menu.Item>
+
+                    <Menu.Item onClick={() => navigate('/health')} leftSection={<MdSupervisorAccount />}>
+                        Stats Joueurs
                     </Menu.Item>
                     
                     <Menu.Divider />
