@@ -54,6 +54,7 @@ const App: React.FC = () => {
           <Routes>
             <Route path="/" element={<LastMatches matches={matches} />} />
             <Route path="/globalstats" element={<GlobalStats matches={matches} />} />
+            <Route path="/playerstats" element={<PlayerStats />} />
             <Route path="/auth-success" element={<AuthSuccess />} />
             <Route path="*" element={<NotFoundPage />} />
           </Routes>
