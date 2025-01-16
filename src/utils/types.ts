@@ -9,3 +9,10 @@ export interface MatchStat {
     loserFaction: string;
     loserFactionType: string;
 }
+
+export interface Tickrates {
+    tickrate: number;
+    players: number;
+    time: string;
+    match: number;
+}
