@@ -49,7 +49,7 @@ const App: React.FC = () => {
 
         const data = await response.json();
 
-        if (data) setRecentTickrates(data);
+        if (data.success) setRecentTickrates(data.data);
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       } catch (error: any) {
         console.error('Error fetching server health stats:', error);
