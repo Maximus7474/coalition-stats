@@ -12,16 +12,16 @@ const NotFoundPage = () => {
             </Text>
 
             <Image
-                src="https://static.wikia.nocookie.net/squad_gamepedia/images/c/cd/Squad_US_Army_Wallpaper_1920x1080.png/revision/latest?cb=20180915174331"
+                src="https://pbs.twimg.com/media/Gg3B8GDWUAAmMix?format=jpg&name=4096x4096"
                 alt="404 Image"
                 radius="lg"
-                style={{ maxWidth: '40%' }}
+                style={{ width: '50%' }}
             />
             <Text size="sm" fs="italic" style={{marginBottom: '1.5em'}}>
                 Credit to:{' '}
                 <Text component='a' href="https://www.joinsquad.com" target='_blank' fs="underline" td="underline" c="blue">
                     Squad
-                </Text> on Facebook</Text>
+                </Text> on X</Text>
             <Button component={Link} to="/" variant="outline" size="md">
                 Retour en zone sure
             </Button>
