@@ -41,8 +41,7 @@ const App: React.FC = () => {
     };
     const fetchServerHealthStats = async () => {
       try {
-        // const response = await fetch('/api/getServerHealth');
-        const response = await fetch('http://localhost:5000/api/statistics/server');
+        const response = await fetch('/api/getServerHealth');
 
         if (!response.ok) {
           throw new Error(`API request failed with status ${response.status}`);
